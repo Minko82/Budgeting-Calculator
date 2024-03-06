@@ -1,43 +1,38 @@
 #include <iostream>
+#include <thread> // Library used for sleep
+#include "startBudget.cpp"
 
 using namespace std;
 
 class UserGuide {
     public: 
-        int initialAmount = 0;
-	    int incomeFrequency = 0;
-	    int incomeAmount = 0;
 
-        void getInfo(){
-            cout << "\033[2J\033[1;1H"; // clears terminal
+        UserGuide(){
+            int menuOption = 0;
 
-		    cout << "\033[38;5;206mPlease enter the initial amount for your budget: \033[0m \n" << endl;
-		    cin >> initialAmount;
+            cout << "\033[38;5;206mWelcome to the Budgeting Calculator!\033[0m \n" << endl; //Makes text bold + pink
 
-            cout << "\033[38;5;206mHow often do you recieve your income? \n1.) Weekly \n2.) Biweekly \033[0m \n" << endl;
-		    cin >> incomeFrequency;
+            this_thread::sleep_for(chrono::milliseconds(350)); // Sleeps for 350ms
 
-            cout << "\033[38;5;206mPlease enter the income amount that you earn every \033[0m";
+            cout << "Select an option from the following menu: " << endl;
 
-            if (incomeFrequency == 1) { 
-                cout << "\033[38;5;206mweekly period:\033[0m" << endl;
+            cout << "1.) Start Budgeting \n2.) User Guide" << endl;
+            cin >> menuOption;
+
+            // Start budgeting
+            if (menuOption == 1) { 
+                StartBudget budget; 
             }
             // User Guide 
-            else if (incomeFrequency == 2){
-                cout << "\033[38;5;206mbiweekly period:\033[0m" << endl; 
+            else if (menuOption == 2){
+                cout << "OPEN GUIDE WOOWHOOOWHOO" << endl;
             }
             // Invalid option
             else {
-                while ((incomeFrequency != 1) || (incomeFrequency != 2)) {
-                    cout << "Please enter 1 for weekly payments or 2 for biweekly payments:" << endl;
-                    cin >> incomeFrequency;
+                while ((menuOption != 1) || (menuOption != 2)) {
+                    cout << "Please enter 1 for starting your budget or 2 for the user guide:" << endl;
+                    cin >> menuOption;
                 }
             }
-
         }
-
-        void func1(int budgetAmount){
-            cout << "You have " << budgetAmount << endl;
-        }
-
 };
